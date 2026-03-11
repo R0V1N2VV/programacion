@@ -1,0 +1,98 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+struct libros {
+int id_libro[50],anio_publicacion[50], ejemplares_disponibles[50];
+string titulo[50], autor[50];
+};
+
+struct usuarios {
+int id_usuario[30];
+string nombre[30], apellido[30], email[30];
+
+};
+
+struct prestamos {
+int id_prestamo[3], id_usuario[3], id_libro[3];
+string fecha_prestamo[3], fecha_devolucion[3];
+};
+
+int main() {
+    int opcion;
+    bool salir = false;
+
+    while (!salir) {
+       cout << "--- MENU DE OPCIONES ---" << endl;
+       cout << "1.registrar libros" << endl;
+       cout << "2. registrar de usuarios" << endl;
+       cout << "3. Consutal libros disponibles" << endl;
+       cout << "4. Realizar prestamo" << endl;
+       cout << "5. registrar devolucion" << endl;
+       cout << "6. salir" << endl;
+        cin >> opcion;
+        
+       
+        switch (opcion) {
+            case 1:
+        
+        if (opcion == 1) {
+        libros libro;
+        int i = 0;
+            if (i < 50) {
+                cout << "Ingrese ID del libro: ";
+                cin >> libro.id_libro[i];
+                cout << "Ingrese titulo: ";
+                cin >> libro.titulo[i];
+                cout << "Ingrese autor: ";
+                cin >> libro.autor[i];
+                cout << "Ingrese año de publicacion: ";
+                cin >> libro.anio_publicacion[i];
+                cout << "Ingrese ejemplares disponibles: ";
+                cin >> libro.ejemplares_disponibles[i];
+                cout << "Libro registrado exitosamente." << endl;
+                i++;
+            } else {
+                cout << "Limite de libros alcanzado." << endl;
+            }
+        break;
+        }
+        
+        case 2:
+        if (opcion == 2) {
+            usuarios usuario;
+           int j = 0;
+            if (j < 30) {
+                cout << "Ingrese ID del usuario: ";
+                cin >> usuario.id_usuario[j];
+                cout << "Ingrese el nombre: ";
+                cin >> usuario.nombre[j];
+                cout << "Ingrese el apellido: ";
+                cin >> usuario.apellido[j];
+                cout << "Ingrese el gmail: ";
+                cin >> usuario.email[j];
+                cout << "Usuario Registrado" << endl;
+                j++;
+            } else {
+                cout << "Limite de usuarios alcanzado." << endl;
+            }
+        break;
+        }
+        case 3:
+         if (opcion==3) {
+            libros libro;
+            cout << "Libros disponibles:" << endl;
+            for (int i = 0; i < 50; i++){ 
+                    cout << libro.id_libro[i]  << " titulo" << libro.titulo[i] << " autor " << libro.autor[i] << " anio de publicacion" << libro.anio_publicacion[i] << ") - Ejemplares disponibles: " << libro.ejemplares_disponibles[i] << endl;
+            }
+
+        
+         }
+            break;
+        }
+        cout << endl;
+    }
+
+    return 0;
+}
