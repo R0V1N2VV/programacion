@@ -118,7 +118,7 @@ int main() {
             }
 
             case 4: {
-                if (prestamos.size() < 3) {
+                if (prestamos.size() < 30) {
                     Prestamo prestamo;
 
                     cout << "Ingrese ID del prestamo: ";
@@ -130,15 +130,35 @@ int main() {
                     cout << "Ingrese ID del libro: ";
                     cin >> prestamo.id_libro;
 
-                    cout << "Ingrese fecha de prestamo: ";
-                    cin >> prestamo.fecha_prestamo;
+                    bool libroEncontrado = false;
 
-                    cout << "Ingrese fecha de devolucion: ";
-                    cin >> prestamo.fecha_devolucion;
+                    for (int i = 0; i < libros.size(); i++) {
+                        if (libros[i].id_libro == prestamo.id_libro) {
+                            libroEncontrado = true;
 
-                    prestamos.push_back(prestamo);
+                            if (libros[i].ejemplares_disponibles > 0) {
+                                cout << "Ingrese fecha de prestamo: ";
+                                cin >> prestamo.fecha_prestamo;
 
-                    cout << "Prestamo registrado." << endl;
+                                cout << "Ingrese fecha de devolucion: ";
+                                cin >> prestamo.fecha_devolucion;
+
+                                prestamos.push_back(prestamo);
+
+                                libros[i].ejemplares_disponibles--;
+
+                                cout << "Prestamo realizado correctamente." << endl;
+                            } else {
+                                cout << "No hay ejemplares disponibles." << endl;
+                            }
+
+                            break;
+                        }
+                    }
+
+                    if (!libroEncontrado) {
+                        cout << "El libro no existe." << endl;
+                    }
                 } else {
                     cout << "Limite de prestamos alcanzado." << endl;
                 }
