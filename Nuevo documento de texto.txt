@@ -118,86 +118,73 @@ int main() {
             }
 
             case 4: {
-                if (prestamos.size() < 30) {
-                    Prestamo prestamo;
+    if (prestamos.size() < 30) {
 
-                    cout << "Ingrese ID del prestamo: ";
-                    cin >> prestamo.id_prestamo;
+        Prestamo prestamo;
 
-                    cout << "Ingrese ID del usuario: ";
-                    cin >> prestamo.id_usuario;
+        cout << "Ingrese ID del prestamo: ";
+        cin >> prestamo.id_prestamo;
 
-                    cout << "Ingrese ID del libro: ";
-                    cin >> prestamo.id_libro;
+        cout << "Ingrese ID del usuario: ";
+        cin >> prestamo.id_usuario;
 
-                    bool libroEncontrado = false;
+        cout << "Ingrese ID del libro: ";
+        cin >> prestamo.id_libro;
 
-                    for (int i = 0; i < libros.size(); i++) {
-                        if (libros[i].id_libro == prestamo.id_libro) {
-                            libroEncontrado = true;
+        for (int i = 0; i < libros.size(); i++) {
 
-                            if (libros[i].ejemplares_disponibles > 0) {
-                                cout << "Ingrese fecha de prestamo: ";
-                                cin >> prestamo.fecha_prestamo;
+            if (libros[i].id_libro == prestamo.id_libro) {
 
-                                cout << "Ingrese fecha de devolucion: ";
-                                cin >> prestamo.fecha_devolucion;
+                if (libros[i].ejemplares_disponibles > 0) {
 
-                                prestamos.push_back(prestamo);
+                    cout << "Ingrese fecha de prestamo: ";
+                    cin >> prestamo.fecha_prestamo;
 
-                                libros[i].ejemplares_disponibles--;
+                    prestamos.push_back(prestamo);
 
-                                cout << "Prestamo realizado correctamente." << endl;
-                            } else {
-                                cout << "No hay ejemplares disponibles." << endl;
-                            }
+                    libros[i].ejemplares_disponibles--;
 
-                            break;
-                        }
-                    }
+                    cout << "Prestamo realizado correctamente." << endl;
 
-                    if (!libroEncontrado) {
-                        cout << "El libro no existe." << endl;
-                    }
                 } else {
-                    cout << "Limite de prestamos alcanzado." << endl;
+                    cout << "No hay ejemplares disponibles." << endl;
                 }
+
                 break;
             }
+        }
 
-            case 5: {
+    } else {
+        cout << "Limite de prestamos alcanzado." << endl;
+    }
+
+    break;
+}
+
+           case 5: {
 
     int id;
-    cout << "Ingrese ID del prestamo a devolver: ";
+    cout << "Ingrese ID del prestamo: ";
     cin >> id;
-
-    bool encontrado = false;
 
     for (int i = 0; i < prestamos.size(); i++) {
 
         if (prestamos[i].id_prestamo == id) {
 
-            int idLibro = prestamos[i].id_libro;
-
             for (int j = 0; j < libros.size(); j++) {
 
-                if (libros[j].id_libro == idLibro) {
+                if (libros[j].id_libro == prestamos[i].id_libro) {
+
                     libros[j].ejemplares_disponibles++;
+
+                    cout << "Devolucion registrada." << endl;
+
                     break;
                 }
             }
 
-            prestamos.erase(prestamos.begin() + i);
-
-            cout << "Devolucion registrada correctamente." << endl;
-
-            encontrado = true;
             break;
         }
-    }
-
-    if (!encontrado) {
-        cout << "Prestamo no encontrado." << endl;
     }
 
     break;
